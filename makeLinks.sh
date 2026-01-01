@@ -11,28 +11,28 @@ all=false
 
 # Function to create links to Markdown files:
 # ObsidianDir -> DevOpsDir Markdown file
-function link_md() {
-	if [[ $# -lt 1 ]]; then
-		printf "[link_md]: Not enough arguments ($#)\n"
-		exit 1
-	elif [[ $# -gt 1 ]]; then
-		printf "[link_md]: Too many arguments ($#)\n"
-		exit 2
-	fi
+# function link_md() {
+# 	if [[ $# -lt 1 ]]; then
+# 		printf "[link_md]: Not enough arguments ($#)\n"
+# 		exit 1
+# 	elif [[ $# -gt 1 ]]; then
+# 		printf "[link_md]: Too many arguments ($#)\n"
+# 		exit 2
+# 	fi
 
-	path=$1
+# 	path=$1
 
-	if [[ $dBugg -eq 3 ]]; then
-		printf "NOTE: This is the link_md function\n"
-		printf "mkdir -p basedir \"$( dirname $path )\"\n"
-		printf "ln -s \"$( basename $path )\"\n"
-		printf "DONE\n"
-	fi
+# 	if [[ $dBugg -eq 3 ]]; then
+# 		printf "NOTE: This is the link_md function\n"
+# 		printf "mkdir -p basedir \"$( dirname $path )\"\n"
+# 		printf "ln -s \"$( basename $path )\"\n"
+# 		printf "DONE\n"
+# 	fi
 
-	exit 0
-}
+# 	exit 0
+# }
 
-export -f link_md
+# export -f link_md
 
 if [[ $dBugg -gt 0 ]]; then
 	printf "Obsidian Ops Path [0]: $OBSIDIAN_OPS_PATH\n"
@@ -76,10 +76,6 @@ OBSIDIAN_OPS_PATH=$( echo "$OBSIDIAN_OPS_PATH$MD_PATH" | sed "s,\./,,")
 if [ $dBugg -gt 0 ]; then
 	printf "Obsidian Ops Path [2]: $OBSIDIAN_OPS_PATH\n"
 fi
-
-# test="$dint/$(echo "law/." | sed "s,/.,," )"; echo $test
-# > xyz/law
-
 
 
 # if [ $# -ne 0 ]; then
