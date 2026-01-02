@@ -34,6 +34,31 @@ all=false
 
 # export -f link_md
 
+# Function to clean Obsidian Links directory
+function cleanLinks() {
+	results=$( ps -ef | grep Obsidian | grep -v grep )
+	if [[ ! -z $results ]]; then
+		printf "\nObsidian is running. Quit the application before running the --clean option\n\n"
+		exit 4
+	fi
+
+	files=$(find "$OBSIDIAN_OPS_PATH" ! -type d ! -name "*.md" ! -name '.DS_Store')
+	if [[ -z $files ]]; then
+		printf "\n$OBSIDIAN_OPS_PATH contains only Markdown files. Do you want to remove its contents?\nTHIS IS DESTRUCTIVE and may cause a delay next time Obsidian is launched.\n**Entire Obsidian directory may disappear from the Finder for several minutes.**\n"
+		printf "\nContinue? [ y | n ]: "
+		read delete
+		if [[ $delete != [yY] ]]; then
+			printf "Respond \"Y\" if you really want to remove this directory structure. In the mean time\n   ...Bye 👋\n"
+			exit 0
+		fi
+		printf "Removing $OBSIDIAN_OPS_PATH/*\n"
+		rm -rf "$OBSIDIAN_OPS_PATH"/*
+	else
+		printf "There are non-Markdown files in destination path:\n$files\n   ...Bye 👋\n"
+		exit 3
+	fi
+}
+
 if [[ $dBugg -gt 0 ]]; then
 	printf "Obsidian Ops Path [0]: $OBSIDIAN_OPS_PATH\n"
 fi
@@ -46,22 +71,26 @@ case $# in
 	1)
 		if [ $1 == "--base" ]; then
 			FINDER_OPS_PATH=$FINDER_OPS_BASE
+		elif [ $1 == "--clean" ]; then
+			FINDER_OPS_PATH=$FINDER_OPS_BASE
+			cleanLinks
 		else
 			FINDER_OPS_PATH=$( echo $FINDER_OPS_PATH/$1 | sed 's,/\.,,' )
 		fi
 		;;
 
 	2)
-		if [ $1 == "--base" ]; then
-			FINDER_OPS_PATH=$FINDER_OPS_BASE
-		else
-			FINDER_OPS_PATH=$( echo $FINDER_OPS_PATH/$1 | sed 's,/\.,,' )
+		if [[ $( echo $* | grep -- "--base" ) || $( echo $* | grep -- "--clean" ) ]]; then
+			printf -- "--base and --clean are not compatible with other arguments\n   Usage: makeLinks '[--base || --clean || <input_path> <obsidian_link_path>]'\n"
+			exit 5
 		fi
-			OBSIDIAN_OPS_PATH=$2
+
+		FINDER_OPS_PATH=$( echo $FINDER_OPS_PATH/$1 | sed 's,/\.,,' )
+		OBSIDIAN_OPS_PATH=$2
 		;;
 
 	*)
-		printf "I think there are too many arguments. Syntax:\n   makeLinks '[<input_path> | --base] <obsidian_link_path>'"
+		printf "I think there are too many arguments. Syntax:\n   Usage: makeLinks '[--base || --clean || <input_path> <obsidian_link_path>]'"
 		exit 2
 		;;
 esac
