@@ -5,7 +5,7 @@
 dBugg=0
 FINDER_OPS_BASE="/Users/trinkel/Development/DevOps"
 FINDER_OPS_PATH=`pwd`
-OBSIDIAN_OPS_PATH="/Users/trinkel/Library/Mobile Documents/iCloud~md~obsidian/Documents/dBugg Dev/RepoDocs"
+OBSIDIAN_OPS_PATH="/Users/trinkel/Library/Mobile Documents/iCloud~md~obsidian/Documents/dBugg Dev/RepoDocs.nosync"
 
 all=false
 
