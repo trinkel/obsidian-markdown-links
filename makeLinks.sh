@@ -140,18 +140,18 @@ fi
 cd "$FINDER_OPS_PATH" \
 && find . -type d \( -name node_modules -o -name vendor -o -name src \) -prune -o -iname '*.md' -print0 | while IFS= read -r -d '' path; do
 
-	path=$( echo "$path" | sed "s,\./,,")
-	file_path=$FINDER_OPS_PATH/$path
-	link_file_path=$OBSIDIAN_OPS_PATH/$path
+	path=$( echo "$found_path" | sed "s,\./,,")
+	file_path=$FINDER_OPS_PATH/$found_path
+	link_file_path=$OBSIDIAN_OPS_PATH/$found_path
 	link_base_path=$( dirname "$link_file_path" )
 
 	if [[ $dBugg -eq 3 ]]; then
 		printf "NOTE: this is the find exec\n"
-		printf "Find path: $path\n"
+		printf "Find path: $found_path\n"
 		printf "file_path: $file_path\n"
 		printf "link_base_path: $link_base_path\n"
-		printf "dirname path: $( dirname $path )\n"
-		printf "mkdir: $link_base_path/$( dirname $path )\n"
+		printf "dirname path: $( dirname $found_path )\n"
+		printf "mkdir: $link_base_path/$( dirname $found_path )\n"
 		printf "link_file: $link_file_path -> $file_path\n"
 		exit
 	fi
