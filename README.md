@@ -12,6 +12,7 @@ Viewing Markdown files in VSCode and other code editors kind of sucks. We wanted
 The **`makeLinks`** script creates links (within an Obsidian vault) to relevant Markdown files within repositories avoiding unwanted directories such as `node_modules`. The ignored directories and location of the Obsidian vault can be configured in the script.
 
 `makeLinks.sh` is a Bash script and can be placed anywhere in your filesystem. Execution is from the command line and follows typical shell practices.
+
 ## Installation
 
 - Download the script and copy to the desired location in your filesystem. This can be a location already in your `$PATH` such as `/usr/local/bin`, another location to be added to your `$PATH` or any location and use the full path to the the script to execute.
@@ -26,5 +27,9 @@ The **`makeLinks`** script creates links (within an Obsidian vault) to relevant 
 - `makeLinks.sh <path>` will start examining the filesystem at the specified path.
 - The script will echo back the effective source and link paths.
 - Entering 'Y' to the `continue` question will create the links checking for conflicts in the destination path
+
+## Excluded directories
+
+By default, `makeLinks.sh` ignores `node_modules` and `src` directories. Additional directories can be specified in the script or by adding a specific file in the directory to be excluded. By default, this file is named `.makeLinksIgnore`. A different name can be specified with the `$IGNORE_FILE` variable. This file should be included in a `.gitignore` file so it is not included in remote repositories. Using a `.gitignore_global` file instead excludes it from repositories with affecting a repository's own `.gitignore` file. This is useful for public repos that don't need information about your local repo.
 
 
