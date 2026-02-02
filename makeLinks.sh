@@ -9,31 +9,6 @@ OBSIDIAN_OPS_PATH="/Users/trinkel/Library/Mobile Documents/iCloud~md~obsidian/Do
 
 all=false
 
-# Function to create links to Markdown files:
-# ObsidianDir -> DevOpsDir Markdown file
-# function link_md() {
-# 	if [[ $# -lt 1 ]]; then
-# 		printf "[link_md]: Not enough arguments ($#)\n"
-# 		exit 1
-# 	elif [[ $# -gt 1 ]]; then
-# 		printf "[link_md]: Too many arguments ($#)\n"
-# 		exit 2
-# 	fi
-
-# 	path=$1
-
-# 	if [[ $dBugg -eq 3 ]]; then
-# 		printf "NOTE: This is the link_md function\n"
-# 		printf "mkdir -p basedir \"$( dirname $path )\"\n"
-# 		printf "ln -s \"$( basename $path )\"\n"
-# 		printf "DONE\n"
-# 	fi
-
-# 	exit 0
-# }
-
-# export -f link_md
-
 # Function to clean Obsidian Links directory
 function cleanLinks() {
 	results=$( ps -ef | grep Obsidian | grep -v grep )
