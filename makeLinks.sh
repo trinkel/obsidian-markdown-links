@@ -6,6 +6,7 @@ dBugg=0
 FINDER_OPS_BASE="/Users/trinkel/Development/DevOps"
 FINDER_OPS_PATH=`pwd`
 OBSIDIAN_OPS_PATH="/Users/trinkel/Library/Mobile Documents/iCloud~md~obsidian/Documents/dBugg Dev/RepoDocs.nosync"
+IGNORE_FILE=".makeLinksIgnore"
 
 all=false
 
@@ -113,9 +114,9 @@ if [[ $continue != [yY] ]]; then
 fi
 
 cd "$FINDER_OPS_PATH" \
-&& find . -type d \( -name node_modules -o -name vendor -o -name src \) -prune -o -iname '*.md' -print0 | while IFS= read -r -d '' path; do
+&& find . -type d \( -name node_modules -o -name vendor -o -name src -o -exec test -e "{}/$IGNORE_FILE" \; \) -prune -o -type f -iname '*.md' -print0 | while IFS= read -r -d '' found_path; do
 
-	path=$( echo "$found_path" | sed "s,\./,,")
+	found_path=$( echo "$found_path" | sed "s,\./,,")
 	file_path=$FINDER_OPS_PATH/$found_path
 	link_file_path=$OBSIDIAN_OPS_PATH/$found_path
 	link_base_path=$( dirname "$link_file_path" )
