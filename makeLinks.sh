@@ -145,7 +145,7 @@ cd "$FINDER_OPS_PATH" \
 	link_file_path=$OBSIDIAN_OPS_PATH/$found_path
 	link_base_path=$( dirname "$link_file_path" )
 
-	if [[ $dBugg -eq 3 ]]; then
+	if [[ $dBugg -eq -3 ]]; then
 		printf "NOTE: this is the find exec\n"
 		printf "Find path: $found_path\n"
 		printf "file_path: $file_path\n"
@@ -153,7 +153,7 @@ cd "$FINDER_OPS_PATH" \
 		printf "dirname path: $( dirname $found_path )\n"
 		printf "mkdir: $link_base_path/$( dirname $found_path )\n"
 		printf "link_file: $link_file_path -> $file_path\n"
-		exit
+		continue
 	fi
 
 	# Create link directory if necessary
@@ -196,7 +196,7 @@ cd "$FINDER_OPS_PATH" \
 done
 
 printf "\n"
-
+	# echo "***This should not print***"
 	# -exec /bin/bash -c 'link_md "{}"' \;
 	# link_md test
 		#-exec printf "$OBSIDIAN_OPS_PATH{}\n" \; #-exec ln -s "{}" "$OBSIDIAN_OPS_PATH" \;
