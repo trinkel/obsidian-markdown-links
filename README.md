@@ -30,6 +30,6 @@ The **`makeLinks`** script creates links (within an Obsidian vault) to relevant 
 
 ## Excluded directories
 
-By default, `makeLinks.sh` ignores `node_modules` and `src` directories. Additional directories can be specified in the script or by adding a specific file in the directory to be excluded. By default, this file is named `.makeLinksIgnore`. A different name can be specified with the `$IGNORE_FILE` variable. This file should be included in a `.gitignore` file so it is not included in remote repositories. Using a `.gitignore_global` file instead excludes it from repositories with affecting a repository's own `.gitignore` file. This is useful for public repos that don't need information about your local repo.
+By default, `makeLinks.sh` ignores `node_modules` and `src` directories. Additional directories can be specified in the script or by adding a specific file in the directory to be excluded. By default, this file is named `.makeLinksIgnore`. A different name can be specified without the `$IGNORE_FILE` variable. This file should be included in a `.gitignore` file so it is not included in remote repositories. Using a `.gitignore_global` file instead excludes it from repositories with affecting a repository's own `.gitignore` file. This is useful for public repos that don't need information about your local repo.
 
 
